@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 //        System.out.println("MyGame:");
         JFrame gameWindow = new JFrame("MyGame");
-        gameWindow.setSize(500,500);//sets the window size
+        gameWindow.setSize(768,576);//sets the window size
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);//close when clicked on 'X'
 
         GamePanel gamePanel = new GamePanel();//created new gamePanel

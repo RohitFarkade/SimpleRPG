@@ -1,21 +1,24 @@
 package Main;
 import Entity.Player;
+import Tile.TileManager;
+
 import javax.swing.*;//jpannel
 import java.awt.*;//dimension
 
 public class GamePanel extends JPanel implements Runnable {
     //Screen Setting
-    final int originalTileSize = 16;//character ,npc defualt size,tile
-    final int scale = 3;//for scaling according to display resolution
+    public final int originalTileSize = 16;//character ,npc defualt size,tile
+   public final int scale = 3;//for scaling according to display resolution
     public final int tileSize = originalTileSize*scale;//new scaled resolution
-    final int maxScreenCol = 16;//game display 16 horizontly
-    final int maxScreenRow = 12;// game display verticaly
-    final int screenWidth= tileSize*maxScreenCol;//768 pixel
-    final int screenHeight= tileSize*maxScreenRow;//576 pixel //total gameScreen Size
+   public final int maxScreenCol = 16;//game display 16 horizontly
+  public   final int maxScreenRow = 12;// game display verticaly
+    public final int screenWidth= tileSize*maxScreenCol;//768 pixel
+    public final int screenHeight= tileSize*maxScreenRow;//576 pixel //total gameScreen Size
 
     //FPS
     int FPS = 60;
 
+    TileManager tileM = new TileManager(this);
 
     KeyHandler keyH = new KeyHandler();
     Player player = new Player(this,keyH);
@@ -119,6 +122,7 @@ public void run(){
 
         super.paintComponent(g);//always defualt must use
         Graphics2D g2 = (Graphics2D)g;//Graphics2D extends Graphics to get better control over geometry position colour layputs etc
+        tileM.draw(g2);
         player.draw(g2);//goes to player class draw method
         g2.dispose();// realeases resourse when done
 
