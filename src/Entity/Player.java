@@ -13,6 +13,9 @@ public class Player extends Entity {
     KeyHandler keyH;
     public final int screenX;
     public final int screenY;
+    public final int health;
+    public int score;
+
 
 
     public Player(GamePanel gp, KeyHandler keyH) {
@@ -21,6 +24,8 @@ public class Player extends Entity {
         screenY = gp.screenHeight / 2 - (gp.tileSize / 2);
         screenX = gp.screenWidth / 2 - (gp.tileSize / 2);
         solidArea = new Rectangle(8, 16, 32, 32);
+        health = 100;
+        score = 0;
 
         setDefualtValues();
         getPlayerImage();
@@ -126,6 +131,23 @@ public class Player extends Entity {
                 }
                 break;
         }
+        g2.drawString("Score:"+score,0,0);
         g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+
     }
+    double delta = 0;
+
+    public void scoreCalculator(){
+        if((keyH.rightPressed||keyH.leftPressed|| keyH.downPressed|| keyH.upPressed) && collisionOn == false) {
+
+            delta +=Math.sqrt(worldX * worldX + worldY * worldY)/1000;
+            while(delta>=20){
+               this.score +=  1;
+               delta = 0;
+
+            }
+
+        }
+    }
+
 }

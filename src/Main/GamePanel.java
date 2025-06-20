@@ -29,6 +29,8 @@ public class GamePanel extends JPanel implements Runnable {
    public Player player = new Player(this, keyH);
     //set Players defualt postion
     private FPSCounter fpsCounter;
+    ScoreCalculator scoreCalc = new ScoreCalculator();
+
 
     public GamePanel() {
         fpsCounter = new FPSCounter();
@@ -117,6 +119,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         player.update();
+        player.scoreCalculator();
+        System.out.println("Player's Score is: "+player.score);
     }
 
     //draw thigs standart component
@@ -125,7 +129,13 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);//always defualt must use
         Graphics2D g2 = (Graphics2D) g;//Graphics2D extends Graphics to get better control over geometry position colour layputs etc
         tileM.draw(g2);
-        player.draw(g2);//goes to player class draw method
+        player.draw(g2);
+        Font myFont = new Font("Courier New", Font.BOLD, 30);
+        g2.setFont(myFont);
+        Color myColor = new Color( 255, 255, 255); // Red color (RGB values))
+        g2.setColor( myColor); // Red color (RGB values));
+        scoreCalc.draw(g2,player);
+        //goes to player class draw method
         g2.dispose();// realeases resourse when done
 
     }
